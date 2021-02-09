@@ -29,7 +29,7 @@
                 <div class="form-group">
                     <div class="col-md-10 offset-md-2 checkbox">
                         <label asp-for="RememberMe" class="pr-4 pl-0">
-                            <input asp-for="RememberMe"/>
+                            <input asp-for="RememberMe" />
                         </label>
                         Remember me?
                     </div>
@@ -48,3 +48,7 @@
         </section>
     </div>
 </div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
