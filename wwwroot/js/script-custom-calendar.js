@@ -12,10 +12,21 @@ function InitializeCalendar() {
                 right: 'month, agendaWeek, agendaDay'
             },
             selectable: true,
-            editable: false
+            editable: false,
+            select: function (event) {
+                onShowModal(event, null);
+            }
         });
     }
     catch (e) {
         alert(e); 
     }
+}
+
+function onShowModal(obj, isEventDetail) {
+    $("#appointmentInput").modal("show");
+}
+
+function onCloseModal() {
+    $("#appointmentInput").modal("hide");
 }
