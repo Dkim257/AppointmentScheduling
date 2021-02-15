@@ -19,5 +19,6 @@
     <Folder Include="Utilities\" />
     <Folder Include="Services\" />
     <Folder Include="Views\Appointment\" />
+    <Folder Include="Controllers\Api\" />
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@ using AppointmentScheduling.Models;
 using AppointmentScheduling.Models.ViewModels;
 using System.Linq;
 using AppointmentScheduling.Utilities;
+using System.Threading.Tasks;
 
 namespace AppointmentScheduling.Services
 { 
@@ -15,6 +16,38 @@ namespace AppointmentScheduling.Services
         public AppointmentService(ApplicationDbContext db)
         {
             _db = db;
+        }
+
+        public async Task<int> AddUpdate(AppointmentViewModel model)
+        {
+            var startDate = DateTime.Parse(model.StartDate);
+            var endDate = DateTime.Parse(model.StartDate).AddMinutes(Convert.ToDouble(model.Duration));
+
+            if (model != null && model.Id > 0)
+            {
+                // Update
+                return 1;
+
+            } else
+            {
+                // Create
+                Appointment appointment = new Appointment()
+                {
+                    Title = model.Title,
+                    Description = model.Description,
+                    StartDate = startDate,
+                    EndDate = endDate,
+                    Duration = model.Duration,
+                    DoctorId = model.DoctorId,
+                    PatientId = model.PatientId,
+                    IsDoctorApproved = false,
+                    AdminId = model.AdminId
+                };
+
+                _db.Appointments.Add(appointment);
+                await _db.SaveChangesAsync();
+                return 2;
+            }
         }
 
         public List<DoctorViewModel> GetDoctorList()
